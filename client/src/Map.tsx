@@ -1,10 +1,13 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-function Map() {
-    // const [count, setCount] = useState(0)
-    const [points, setPoints] = useState([]);
+interface MapProps {
+    clickCallback: (e: L.LeafletMouseEvent, map: L.Map) => void;
+}
+
+const Map: React.FC<MapProps> = ({ clickCallback }) => {
+    // const [points, setPoints] = useState([]);
 
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const mapRef = useRef<L.Map | null>(null);
@@ -26,9 +29,7 @@ function Map() {
                 .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
                 .openPopup();
 
-            mapRef.current.on("click", (e) => {
-                setPoints((prevPoints) => [...prevPoints, e.latlng]);
-            })
+            mapRef.current.on("click", (e) => clickCallback(e, mapRef.current));
         }
 
         return () => {
@@ -38,14 +39,14 @@ function Map() {
                 mapRef.current = null;
             }
         }
-    }, []);
+    }, [clickCallback]);
 
-    useEffect(() => {
-        console.log(points);
-        if (points.length >= 4) {
-            L.polygon(points).addTo(mapRef.current);
-        }
-    }, [points])
+    // useEffect(() => {
+    //     console.log(points);
+    //     if (points.length >= 4) {
+    //         L.polygon(points).addTo(mapRef.current);
+    //     }
+    // }, [points])
 
     return <div ref={mapContainerRef} style={{ height: "800px", width: "100%" }} />;
     };
