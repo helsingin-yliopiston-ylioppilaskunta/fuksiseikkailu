@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './App.css'
 
 import L from "leaflet";
@@ -6,8 +6,6 @@ import L from "leaflet";
 import Map from "./Map";
 
 function App() {
-    const [count, setCount] = useState(0)
-
     function handleClick(event: L.LeafletMouseEvent, map: L.Map) {
         console.log(event.latlng, map);
     }
@@ -15,14 +13,9 @@ function App() {
     return (
         <div className="App">
             <h1>Fuksiseikkailu</h1>
-            <div className="card">
-                <p>
-                    Tästä se pikkuhiljaa lähtee rakentumaan!
-                </p>
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-            </div>
+            <p>
+                Tämä on fuksiseikkailu-sovelluksen äärimmäisen testaustason julkaisu!
+            </p>
             <Map clickCallback={handleClick} />
         </div>
     )
