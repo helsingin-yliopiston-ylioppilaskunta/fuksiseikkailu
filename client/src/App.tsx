@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 
+import L from "leaflet";
+
 import Map from "./Map";
 
 function App() {
     const [count, setCount] = useState(0)
 
-    function handleClick(event, map) {
+    function handleClick(event: L.LeafletMouseEvent, map: L.Map) {
         console.log(event.latlng, map);
     }
 
