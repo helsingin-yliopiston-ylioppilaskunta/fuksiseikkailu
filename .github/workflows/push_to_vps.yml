@@ -19,6 +19,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}         # your private SSH key (stored as a GH secret)
           # passphrase: ${{ secrets.VPS_PASSPHRASE }}  # if your SSH key is passphrase-protected
           script: |
+            source ~/.nvm/nvm.sh
             cd /home/fuksi-client/fuksiseikkailu/client
             git pull origin client-p1
             npm install
