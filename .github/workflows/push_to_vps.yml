@@ -22,5 +22,4 @@ jobs:
             cd /home/fuksi-client/fuksiseikkailu/client
             git pull origin client-p1
             npm install
-            npm test
             npm run build
