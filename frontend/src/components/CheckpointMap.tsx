@@ -28,12 +28,12 @@ interface CheckpointProperties {
 type CheckpointFeature = PointFeature<CheckpointProperties>
 
 const CATEGORY_COLORS: Record<string, string> = {
-    academic: 'bg-blue-600 text-white border-blue-200',
-    party: 'bg-pink-600 text-white border-pink-200',
-    sports: 'bg-emerald-600 text-white border-emerald-200',
-    start: 'bg-amber-500 text-white border-amber-200 ring-2 ring-amber-400/50',
-    afterparty: 'bg-purple-600 text-white border-purple-200 ring-2 ring-purple-400/50',
-    default: 'bg-vintage-berry-800 text-white border-white',
+    academic: 'bg-blue-400 text-black',
+    party: 'bg-pink-400 text-black',
+    sports: 'bg-emerald-400 text-black',
+    start: 'bg-amber-400 text-black',
+    afterparty: 'bg-purple-400 text-black',
+    default: 'bg-blush-pop-400 text-black',
 }
 
 function CheckpointSearch({
@@ -75,7 +75,7 @@ function CheckpointSearch({
             className="absolute top-3 left-3 z-10 w-72"
             onTouchStart={(e) => e.stopPropagation()}
         >
-            <div className="relative flex items-center rounded-lg bg-surface-elevated/95 shadow-md border border-border-subtle backdrop-blur-sm">
+            <div className="relative flex items-center bg-surface-elevated shadow-md border-black border-2 backdrop-blur-sm">
                 <Search className="ml-3 h-4 w-4 text-text-muted shrink-0" />
                 <input
                     type="text"
@@ -91,7 +91,7 @@ function CheckpointSearch({
             </div>
 
             {isOpen && filtered.length > 0 && (
-                <ul className="mt-1 max-h-60 overflow-auto rounded-lg bg-surface-elevated p-1 shadow-lg border border-border-subtle backdrop-blur-sm">
+                <ul className="max-h-60 overflow-auto bg-surface-elevated p-1 shadow-lg border-2 border-black backdrop-blur-sm border-t-0">
                     {filtered.map((cp) => (
                         <li key={cp.id}>
                             <button
@@ -125,16 +125,19 @@ function CheckpointMarker({
     showNameLabel: boolean
     onClick: (e: { originalEvent: MouseEvent }) => void
 }) {
-    const colorClass = CATEGORY_COLORS[checkpoint.category || 'default']
+    // Safely resolve category class with fallback to 'default'
+    const categoryKey = checkpoint.category && CATEGORY_COLORS[checkpoint.category]
+        ? checkpoint.category
+        : 'default'
+    const colorClass = CATEGORY_COLORS[categoryKey]
 
     return (
-        /* Changed anchor to "center" so the circle center stays strictly locked to coordinates */
         <Marker longitude={longitude} latitude={latitude} anchor="center" onClick={onClick}>
             <div className="relative group flex flex-col items-center cursor-pointer">
                 {/* Circle Pin - Center Anchored */}
                 <div
                     className={cn(
-                        'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold shadow-md transition-transform hover:scale-110',
+                        'flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold shadow-md transition-transform hover:scale-110 border-2 border-black',
                         colorClass
                     )}
                     style={checkpoint.color ? { backgroundColor: checkpoint.color } : undefined}
@@ -148,9 +151,9 @@ function CheckpointMarker({
                     )}
                 </div>
 
-                {/* Text Label - Absolutely positioned below the pin without shifting the pin container height */}
+                {/* Text Label */}
                 {showNameLabel && (
-                    <span className="absolute top-full mt-1 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap rounded bg-surface-elevated/90 px-1.5 py-0.5 text-[11px] font-semibold text-text-main shadow-sm backdrop-blur-sm border border-border-subtle">
+                    <span className="absolute top-full mt-1 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap bg-surface-elevated px-1.5 py-0.5 text-[11px] font-semibold text-text-main shadow-sm backdrop-blur-sm border-2 border-black">
                         {checkpoint.name}
                     </span>
                 )}
@@ -203,7 +206,6 @@ function ClusteredCheckpointMarkers({
         setZoom(map.getZoom())
     }, [map])
 
-    // Attach listener to close popup when clicking on empty map area
     React.useEffect(() => {
         if (!map) return
         updateViewState()
@@ -264,7 +266,7 @@ function ClusteredCheckpointMarkers({
                                 })
                             }}
                         >
-                            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-vintage-berry-600 font-bold text-white shadow-lg transition-transform hover:scale-110 cursor-pointer">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-black bg-blush-pop-400 font-bold text-black shadow-lg transition-transform hover:scale-110 cursor-pointer">
                                 {pointCount}
                             </div>
                         </Marker>
@@ -294,24 +296,24 @@ function ClusteredCheckpointMarkers({
                 <Popup
                     longitude={selectedCheckpoint.longitude}
                     latitude={selectedCheckpoint.latitude}
-                    anchor="top"
+                    anchor="bottom"
+                    offset={18}
                     onClose={() => setSelectedCheckpoint(null)}
                     closeOnClick={true}
                     focusAfterOpen={false}
-                    className="[&_.maplibregl-popup-content]:p-0 [&_.maplibregl-popup-content]:rounded-xl [&_.maplibregl-popup-content]:shadow-xl [&_.maplibregl-popup-content]:border [&_.maplibregl-popup-content]:border-border-subtle [&_.maplibregl-popup-close-button]:hidden"
+                    className="[&_.maplibregl-popup-content]:p-0 [&_.maplibregl-popup-content]:rounded-xl [&_.maplibregl-popup-content]:shadow-xl [&_.maplibregl-popup-content]:border-2 [&_.maplibregl-popup-content]:border-black [&_.maplibregl-popup-close-button]:hidden"
                 >
                     <div className="relative min-w-[200px] max-w-xs p-3.5 bg-surface-elevated rounded-xl">
-                        {/* Custom Close Button */}
                         <button
                             type="button"
                             onClick={() => setSelectedCheckpoint(null)}
-                            className="absolute top-2.5 right-2.5 flex h-5 w-5 items-center justify-center rounded-full text-text-muted hover:bg-vintage-berry-100 hover:text-text-main transition-colors"
+                            className="absolute top-2.5 right-2.5 flex h-5 w-5 items-center justify-center rounded-full text-text-muted hover:bg-blush-pop-100 hover:text-text-main transition-colors"
                         >
                             <X className="h-3.5 w-3.5" />
                         </button>
 
                         <div className="flex items-center gap-2.5 pr-6">
-                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-vintage-berry-800 text-xs font-bold text-white shadow-xs [&>svg]:h-3.5 [&>svg]:w-3.5">
+                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blush-pop-400 text-xs font-bold text-black border border-black shadow-xs [&>svg]:h-3.5 [&>svg]:w-3.5">
                                 {selectedCheckpoint.icon ?? selectedCheckpoint.number ?? '•'}
                             </span>
                             <h4 className="font-bold text-sm text-text-main leading-tight">
@@ -320,7 +322,7 @@ function ClusteredCheckpointMarkers({
                         </div>
 
                         {selectedCheckpoint.description && (
-                            <p className="mt-2 text-xs text-text-muted leading-relaxed border-t border-border-subtle/50 pt-2">
+                            <p className="mt-2 text-xs text-text-muted leading-relaxed border-t border-black/20 pt-2">
                                 {selectedCheckpoint.description}
                             </p>
                         )}
@@ -341,8 +343,10 @@ export function CheckpointMap({
     onCheckpointClick?: (checkpoint: Checkpoint) => void
 }) {
     return (
-        <VectorMap className={className}>
-            <ClusteredCheckpointMarkers checkpoints={checkpoints} onCheckpointClick={onCheckpointClick} />
-        </VectorMap>
+        <div className={cn("border-2 border-black h-full")}>
+            <VectorMap className={className}>
+                <ClusteredCheckpointMarkers checkpoints={checkpoints} onCheckpointClick={onCheckpointClick} />
+            </VectorMap>
+        </div>
     )
 }

@@ -45,7 +45,7 @@ export function VectorMap({
     }, [pmtilesUrl, presetTheme])
 
     return (
-        <div className={cn('relative h-full w-full overflow-hidden rounded-sm border border-border-subtle', className)}>
+        <div className={cn('relative h-full w-full overflow-hidden', className)}>
             <Map
                 mapLib={maplibregl}
                 onClick={onClick}

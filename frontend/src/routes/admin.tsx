@@ -2,7 +2,7 @@ import * as React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { CheckpointPlacementAdmin } from '@/components/CheckpointAdmin'
 import type { Checkpoint } from '@/components/CheckpointMap'
-import { Flag, PartyPopper, Beer, Sparkles } from 'lucide-react'
+import { Flag, PartyPopper, Beer, Sparkles, Terminal } from 'lucide-react'
 
 export const Route = createFileRoute('/admin')({
     component: RouteComponent,
@@ -93,16 +93,19 @@ function RouteComponent() {
         <div className="flex flex-1 flex-col min-h-0 h-full w-full max-w-7xl mx-auto gap-3">
             <header className="flex items-center justify-between shrink-0">
                 <div>
-                    <h1 className="text-xl font-bold text-text-main">Checkpoint Admin Tool</h1>
-                    <p className="text-xs text-text-muted">
+                    <h1 className="text-xl font-extrabold uppercase tracking-tight text-black">
+                        Checkpoint Admin Tool
+                    </h1>
+                    <p className="text-xs font-bold text-black/70">
                         Drag markers on the map or click "Set Position" to locate unset checkpoints.
                     </p>
                 </div>
                 <button
                     type="button"
                     onClick={() => console.log('Current Checkpoints:', checkpoints)}
-                    className="rounded-md bg-vintage-berry-900 px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-vintage-berry-800 transition-colors"
+                    className="flex items-center gap-1.5 rounded-md border-2 border-black bg-white px-3 py-1.5 text-xs font-extrabold text-black shadow-2xs hover:bg-blush-pop-100 transition-colors cursor-pointer"
                 >
+                    <Terminal className="h-3.5 w-3.5" />
                     Log Active State
                 </button>
             </header>
