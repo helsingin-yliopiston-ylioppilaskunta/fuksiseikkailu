@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as CheckpointsIndexRouteImport } from './routes/checkpoints/index'
+import { Route as CheckpointsIdRouteImport } from './routes/checkpoints/$id'
+import { Route as CheckpointsCreateRouteImport } from './routes/checkpoints/create'
+import { Route as CheckpointsImportRouteImport } from './routes/checkpoints/import'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +27,98 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckpointsIndexRoute = CheckpointsIndexRouteImport.update({
+  id: '/checkpoints/',
+  path: '/checkpoints/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckpointsIdRoute = CheckpointsIdRouteImport.update({
+  id: '/checkpoints/$id',
+  path: '/checkpoints/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckpointsCreateRoute = CheckpointsCreateRouteImport.update({
+  id: '/checkpoints/create',
+  path: '/checkpoints/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckpointsImportRoute = CheckpointsImportRouteImport.update({
+  id: '/checkpoints/import',
+  path: '/checkpoints/import',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/checkpoints/$id': typeof CheckpointsIdRoute
+  '/checkpoints/create': typeof CheckpointsCreateRoute
+  '/checkpoints/import': typeof CheckpointsImportRoute
+  '/checkpoints/': typeof CheckpointsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/checkpoints/$id': typeof CheckpointsIdRoute
+  '/checkpoints/create': typeof CheckpointsCreateRoute
+  '/checkpoints/import': typeof CheckpointsImportRoute
+  '/checkpoints': typeof CheckpointsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/checkpoints/$id': typeof CheckpointsIdRoute
+  '/checkpoints/create': typeof CheckpointsCreateRoute
+  '/checkpoints/import': typeof CheckpointsImportRoute
+  '/checkpoints/': typeof CheckpointsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth/login'
+    | '/checkpoints/$id'
+    | '/checkpoints/create'
+    | '/checkpoints/import'
+    | '/checkpoints/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin'
-  id: '__root__' | '/' | '/admin'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth/login'
+    | '/checkpoints/$id'
+    | '/checkpoints/create'
+    | '/checkpoints/import'
+    | '/checkpoints'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth/login'
+    | '/checkpoints/$id'
+    | '/checkpoints/create'
+    | '/checkpoints/import'
+    | '/checkpoints/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  CheckpointsIdRoute: typeof CheckpointsIdRoute
+  CheckpointsCreateRoute: typeof CheckpointsCreateRoute
+  CheckpointsImportRoute: typeof CheckpointsImportRoute
+  CheckpointsIndexRoute: typeof CheckpointsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +137,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkpoints/': {
+      id: '/checkpoints/'
+      path: '/checkpoints'
+      fullPath: '/checkpoints/'
+      preLoaderRoute: typeof CheckpointsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkpoints/$id': {
+      id: '/checkpoints/$id'
+      path: '/checkpoints/$id'
+      fullPath: '/checkpoints/$id'
+      preLoaderRoute: typeof CheckpointsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkpoints/create': {
+      id: '/checkpoints/create'
+      path: '/checkpoints/create'
+      fullPath: '/checkpoints/create'
+      preLoaderRoute: typeof CheckpointsCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkpoints/import': {
+      id: '/checkpoints/import'
+      path: '/checkpoints/import'
+      fullPath: '/checkpoints/import'
+      preLoaderRoute: typeof CheckpointsImportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  CheckpointsIdRoute: CheckpointsIdRoute,
+  CheckpointsCreateRoute: CheckpointsCreateRoute,
+  CheckpointsImportRoute: CheckpointsImportRoute,
+  CheckpointsIndexRoute: CheckpointsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

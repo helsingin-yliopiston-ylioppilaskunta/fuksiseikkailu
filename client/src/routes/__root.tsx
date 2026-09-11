@@ -1,11 +1,16 @@
 import * as React from 'react'
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import type { QueryClient } from '@tanstack/react-query'
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { cn } from '@/lib/utils'
 
-export const Route = createRootRoute({
+export interface RouterContext {
+    queryClient: QueryClient
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
     component: RootComponent,
 })
 
@@ -21,7 +26,7 @@ function RootComponent() {
                     </h1>
                 </nav>
             </header>
-            <main className={cn('flex-1 p-2 flex flex-col min-h0 overflow-hidden pb-4')}>
+            <main className={cn('flex-1 p-2 flex flex-col min-h-0 overflow-hidden pb-4')}>
                 <Outlet />
             </main>
             <footer className={cn('p-2')}>
