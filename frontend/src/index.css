@@ -1,35 +1,54 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @theme {
-  /* 1. Raw Palette Scale (Generates utilities like bg-vintage-berry-500, text-vintage-berry-950) */
-  --color-vintage-berry-50: oklch(95.36% 0.014 355.01);
-  --color-vintage-berry-100: oklch(90.88% 0.027 359.98);
-  --color-vintage-berry-200: oklch(81.78% 0.056 359.64);
-  --color-vintage-berry-300: oklch(72.67% 0.089 1.19);
-  --color-vintage-berry-400: oklch(63.96% 0.122 2.82);
-  --color-vintage-berry-500: oklch(55.87% 0.153 6.13);
-  --color-vintage-berry-600: oklch(47.65% 0.128 5.60);
-  --color-vintage-berry-700: oklch(39.04% 0.102 5.65);
-  --color-vintage-berry-800: oklch(29.95% 0.071 4.70);
-  --color-vintage-berry-900: oklch(20.15% 0.040 4.69);
-  --color-vintage-berry-950: oklch(17.10% 0.029 4.51);
+  --color-blush-pop-50: oklch(94.64% 0.032 348.09);
+  --color-blush-pop-100: oklch(89.58% 0.064 350.73);
+  --color-blush-pop-200: oklch(80.05% 0.132 353.12);
+  --color-blush-pop-300: oklch(72.08% 0.196 356.34);
+  --color-blush-pop-400: oklch(66.58% 0.242 1.05);
+  --color-blush-pop-500: oklch(64.06% 0.257 8.07);
+  --color-blush-pop-600: oklch(54.18% 0.217 7.49);
+  --color-blush-pop-700: oklch(43.83% 0.176 6.56);
+  --color-blush-pop-800: oklch(32.82% 0.132 4.81);
+  --color-blush-pop-900: oklch(20.79% 0.084 0.28);
+  --color-blush-pop-950: oklch(16.91% 0.069 358.10);
 
-  /* 2. Semantic Token Namespaces (Generates bg-surface-base, text-text-main, etc.) */
-  --color-surface-base: var(--color-vintage-berry-50);
-  --color-surface-elevated: #ffffff;
+  --color-blaze-orange-50: oklch(96.21% 0.022 54.34);
+  --color-blaze-orange-100: oklch(92.52% 0.044 52.64);
+  --color-blaze-orange-200: oklch(85.23% 0.090 50.78);
+  --color-blaze-orange-300: oklch(78.73% 0.136 49.80);
+  --color-blaze-orange-400: oklch(73.09% 0.178 47);
+  --color-blaze-orange-500: oklch(68.60% 0.210 41.14);
+  --color-blaze-orange-600: oklch(58.17% 0.177 41.65);
+  --color-blaze-orange-700: oklch(47.24% 0.141 42.51);
+  --color-blaze-orange-800: oklch(35.65% 0.103 44.21);
+  --color-blaze-orange-900: oklch(23.24% 0.061 50.78);
+  --color-blaze-orange-950: oklch(19.18% 0.048 54.39);
+
+  /* Semantic Token Namespaces */
+  --color-surface-base: var(--color-blaze-orange-500);
+  --color-surface-elevated: var(--color-white);
   
-  --color-text-main: var(--color-vintage-berry-950);
-  --color-text-muted: var(--color-vintage-berry-700);
+  --color-text-main: var(--color-black);
+  --color-text-muted: var(--color-blaze-orange-900);
 
-  --color-brand-primary: var(--color-vintage-berry-600);
-  --color-brand-hover: var(--color-vintage-berry-700);
+  --color-accent: var(--color-blush-pop-300);
 
-  --color-border-subtle: var(--color-vintage-berry-200);
+  --font-sans: "neue-haas-grotesk-display", "Inter", sans-serif;
 }
 
 @layer base {
   body {
-    background-color: var(--color-surface-base);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    /* Radial gradient: vibrant lighter orange around edges fading to deeper orange core */
+    background: radial-gradient(
+      circle at center,
+      var(--color-blaze-orange-500) 0%,
+      var(--color-blaze-orange-400) 100%
+    );
     color: var(--color-text-main);
     display: flex;
     height: 100vh;

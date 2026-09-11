@@ -13,14 +13,18 @@ function RootComponent() {
     return (
         <React.Fragment>
             <header>
-                <nav className={cn('p-2 border-b border-border-subtle')}>
-                    Home
+                <nav className={cn('p-2')}>
+                    <h1 className={cn('text-sm md:text-base font-extrabold tracking-tighter uppercase leading-none text-black flex items-center gap-3')}>
+                        <span>Fuksiseikkailu</span>
+                        <span className="hidden sm:inline text-black/80">Gulisäventyret</span>
+                        <span className="hidden md:inline text-black/80">Fresher Adventure</span>
+                    </h1>
                 </nav>
             </header>
             <main className={cn('flex-1 p-2 flex flex-col min-h0 overflow-hidden pb-4')}>
                 <Outlet />
             </main>
-            <footer className={cn('p-2 border-t border-border-subtle')}>
+            <footer className={cn('p-2')}>
                 footer
             </footer>
             <TanStackRouterDevtools />
