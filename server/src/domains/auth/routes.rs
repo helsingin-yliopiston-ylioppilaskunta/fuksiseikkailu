@@ -82,9 +82,12 @@ pub async fn verify_otp(
 ) -> Result<Json<AuthTokens>, AppError> {
     payload.validate()?;
 
-    let user = db::find_user_by_email(&state.pool, &payload.email)
+    // Verify code hash and consume OTP
+    let user = db::verify_and_consume_otp(&state.pool, &payload.email, &payload.code)
         .await?
-        .ok_or_else(|| AppError::Unauthorized("Invalid email or code".to_string()))?;
+        .ok_or_else(|| {
+            AppError::Unauthorized("Invalid or expired verification code".to_string())
+        })?;
 
     let tokens =
         issue_token_pair(&state, user.id, user.role, user.checkpoint_id, user.team_id).await?;
