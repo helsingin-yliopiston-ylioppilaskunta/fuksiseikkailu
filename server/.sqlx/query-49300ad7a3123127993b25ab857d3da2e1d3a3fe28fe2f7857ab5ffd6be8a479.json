@@ -1,0 +1,312 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO checkpoints (\n                area_id, number, name, category, location_name, latitude, longitude, \n                accessible, lanes, checkpoint_description, org_description, \n                requirements, execution, url, contact_person, contact_email, contact_phone\n            )\n            VALUES ($1, $2, $3, $4::checkpoint_category, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)\n            RETURNING \n                id, area_id, number, name, category AS \"category: CheckpointCategory\", \n                location_name, latitude, longitude, accessible, lanes, \n                checkpoint_description, org_description, requirements, execution, \n                url, contact_person, contact_email, contact_phone, cancelled, \n                created_at, updated_at\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "ordinal": 1,
+        "name": "area_id",
+        "type_info": "Uuid",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "area_id"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "number",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "number"
+          }
+        }
+      },
+      {
+        "ordinal": 3,
+        "name": "name",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "name"
+          }
+        }
+      },
+      {
+        "ordinal": 4,
+        "name": "category: CheckpointCategory",
+        "type_info": {
+          "Custom": {
+            "name": "checkpoint_category",
+            "kind": {
+              "Enum": [
+                "subject",
+                "nation",
+                "hobby",
+                "other",
+                "hyy",
+                "yliopisto"
+              ]
+            }
+          }
+        },
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "category"
+          }
+        }
+      },
+      {
+        "ordinal": 5,
+        "name": "location_name",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "location_name"
+          }
+        }
+      },
+      {
+        "ordinal": 6,
+        "name": "latitude",
+        "type_info": "Float8",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "latitude"
+          }
+        }
+      },
+      {
+        "ordinal": 7,
+        "name": "longitude",
+        "type_info": "Float8",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "longitude"
+          }
+        }
+      },
+      {
+        "ordinal": 8,
+        "name": "accessible",
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "accessible"
+          }
+        }
+      },
+      {
+        "ordinal": 9,
+        "name": "lanes",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "lanes"
+          }
+        }
+      },
+      {
+        "ordinal": 10,
+        "name": "checkpoint_description",
+        "type_info": "Jsonb",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "checkpoint_description"
+          }
+        }
+      },
+      {
+        "ordinal": 11,
+        "name": "org_description",
+        "type_info": "Jsonb",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "org_description"
+          }
+        }
+      },
+      {
+        "ordinal": 12,
+        "name": "requirements",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "requirements"
+          }
+        }
+      },
+      {
+        "ordinal": 13,
+        "name": "execution",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "execution"
+          }
+        }
+      },
+      {
+        "ordinal": 14,
+        "name": "url",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "url"
+          }
+        }
+      },
+      {
+        "ordinal": 15,
+        "name": "contact_person",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "contact_person"
+          }
+        }
+      },
+      {
+        "ordinal": 16,
+        "name": "contact_email",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "contact_email"
+          }
+        }
+      },
+      {
+        "ordinal": 17,
+        "name": "contact_phone",
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "contact_phone"
+          }
+        }
+      },
+      {
+        "ordinal": 18,
+        "name": "cancelled",
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "cancelled"
+          }
+        }
+      },
+      {
+        "ordinal": 19,
+        "name": "created_at",
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "created_at"
+          }
+        }
+      },
+      {
+        "ordinal": 20,
+        "name": "updated_at",
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "checkpoints",
+            "name": "updated_at"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Int4",
+        "Text",
+        {
+          "Custom": {
+            "name": "checkpoint_category",
+            "kind": {
+              "Enum": [
+                "subject",
+                "nation",
+                "hobby",
+                "other",
+                "hyy",
+                "yliopisto"
+              ]
+            }
+          }
+        },
+        "Text",
+        "Float8",
+        "Float8",
+        "Bool",
+        "Int4",
+        "Jsonb",
+        "Jsonb",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "49300ad7a3123127993b25ab857d3da2e1d3a3fe28fe2f7857ab5ffd6be8a479"
+}

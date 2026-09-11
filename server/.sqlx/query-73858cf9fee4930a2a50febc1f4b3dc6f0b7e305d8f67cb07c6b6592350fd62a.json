@@ -1,0 +1,26 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO users (email, role)\n        VALUES (LOWER($1), $2::user_role)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        {
+          "Custom": {
+            "name": "user_role",
+            "kind": {
+              "Enum": [
+                "admin",
+                "checkpoint",
+                "team"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "73858cf9fee4930a2a50febc1f4b3dc6f0b7e305d8f67cb07c6b6592350fd62a"
+}

@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE users\n        SET \n            otp_code_hash = $1,\n            otp_expires_at = $2,\n            otp_sent_at = NOW(),\n            otp_attempts = 0\n        WHERE LOWER(email) = LOWER($3) AND deleted_at IS NULL\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Timestamptz",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "57a67dd76b0afb7b4b0d681e80168c8f8f6932f931bac05278ffd03991a0cfcc"
+}
